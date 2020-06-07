@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '../../model/user.model';
@@ -11,11 +12,21 @@ import { User } from '../../model/user.model';
 export class HeaderComponent implements OnInit {
   
   user: User = null;
+  big: boolean = true;
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+   if(window.innerWidth<992)
+	   this.big = false;
+   else 
+	   this.big = true;
+  }
 
   constructor(private router: Router, private route: ActivatedRoute) { this.user = JSON.parse(localStorage.getItem('user')); }
 
   ngOnInit(): void {
-	  
+	  if(window.innerWidth<992)
+		  this.big = false;
   }
 
   goHome(){

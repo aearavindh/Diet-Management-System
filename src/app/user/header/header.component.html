@@ -1,9 +1,10 @@
-<nav class="navbar navbar-default">
+<nav *ngIf="big" class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a (click)="goHome()" class="navbar-brand">Home</a>
     </div>
 
+    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
 	    <!-- Administrator -->
         <li *ngIf="user.role === 'Administrator'">
@@ -36,6 +37,50 @@
           <a (click)="onLogout()">Logout</a>
         </li>
       </ul>
+    </div>
   </div>
 </nav>
+
+<div *ngIf="!big" class="nav">
+
+<div *ngIf="user.role==='Administrator'">
+<p>
+<a (click)="goHome()" routerLinkActive="active">Home</a>
+<a routerLink="requests" routerLinkActive="active">Requests</a>
+<a routerLink="manage-users" routerLinkActive="active">Manage Users</a>
+<a routerLink="post" routerLinkActive="active">Post</a>
+<a routerLink="message" routerLinkActive="active">Messages</a>
+<a routerLink="daily-log" routerLinkActive="active">Daily Log</a>
+<a routerLink="monthly-chart" routerLinkActive="active">Monthly Chart</a>
+<a routerLink="change-password" routerLinkActive="active">Change Password</a>
+<a (click)="onLogout()">Logout</a>
+</p>
+</div>
+
+<div *ngIf="user.role==='Motivator'">
+<p>
+<a (click)="goHome()" routerLinkActive="active">Home</a>
+<a routerLink="message" routerLinkActive="active">Messages</a>
+<a routerLink="daily-log" routerLinkActive="active">Daily Log</a>
+<a routerLink="monthly-chart" routerLinkActive="active">Monthly Chart</a>
+<a routerLink="change-password" routerLinkActive="active">Change Password</a>
+<a (click)="onLogout()">Logout</a>
+</p>
+</div>
+
+<div *ngIf="user.role==='Challenger'">
+<p>
+<a (click)="goHome()" routerLinkActive="active">Home</a>
+<a routerLink="post" routerLinkActive="active">Diet/Workout Plan</a>
+<a routerLink="message" routerLinkActive="active">Messages</a>
+<a routerLink="daily-log" routerLinkActive="active">Daily Log</a>
+<a routerLink="monthly-chart" routerLinkActive="active">Monthly Chart</a>
+<a routerLink="change-password" routerLinkActive="active">Change Password</a>
+<a (click)="onLogout()">Logout</a>
+</p>
+</div>
+
+
+</div>
+
 

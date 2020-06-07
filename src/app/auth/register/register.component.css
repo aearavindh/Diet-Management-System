@@ -1,5 +1,6 @@
 .mydiv {
 	width: 90%;
+	overflow: auto;
 }
 .buttons {
 	position: absolute;
