@@ -1,0 +1,38 @@
+<div class="backdrop"></div>
+<div class="alert-box" [ngStyle]="{border: getBorder()}">
+  <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="form-group">
+	<label for="batch">Batch</label>
+	    <select class="form-control" [(ngModel)]="userToBeModified.batchName" id="batch">
+		    <option *ngFor="let batch of batches" [value]="batch">{{batch}}</option>
+        </select>
+	</div>
+	<div class="form-group">
+	<label for="group">Group</label>
+	    <select *ngIf="userToBeModified.batchName==='BELOW_BMI_25'" class="form-control" [(ngModel)]="userToBeModified.groupName" id="group">
+		    <option *ngFor="let group of groups1" [value]="group.name">{{group.name}}</option>
+        </select>
+		<select *ngIf="userToBeModified.batchName==='ABOVE_BMI_25'" class="form-control" [(ngModel)]="userToBeModified.groupName" id="group">
+		    <option *ngFor="let group of groups2" [value]="group.name">{{group.name}}</option>
+        </select>
+	</div>
+	<div class="form-group"> 
+	<label for="role">Role</label>
+          <select class="form-control" [(ngModel)]="userToBeModified.role" id="role">
+		    <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+          </select>
+	</div>
+  </div>
+  </div>
+  <div class="alert-box-actions">
+    <button class="btn" (click)="modify()">modify</button>
+    <button class="btn" (click)="onClose()">Close</button>
+  </div>
+</div>
+
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>

@@ -1,0 +1,42 @@
+<div class="userdiv">
+<div class="row">
+ <div class="container">
+    <table class="table table-hover">
+	<thead>
+	<tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>BMI</th>
+    <th>Medical Conditions</th>
+    <th>Dietary Restrictions</th>
+	<th>Dietary Custom</th>
+	<th>Pregnancy Status</th>
+	<th>View full details</th>
+	<th>Accept</th>
+	<th>Reject</th>
+	</tr></thead>
+	<tbody>
+    <tr *ngFor = "let challenger of challengers">
+    <td>{{challenger.name}}</td>
+    <td>{{challenger.age}}</td>
+    <td>{{challenger.bmi}}</td>
+	<td>{{challenger.medicalConditions}}</td>
+	<td>{{challenger.dietaryRestrictions}}</td>
+	<td>{{challenger.dietaryCustom}}</td>
+	<td>{{challenger.pregnantStatus}}</td>
+	<td><button class="btn" (click)="fullDetails(challenger)">View</button></td>
+    <td><button class="btn" (click)="send(challenger,'accepted')">Accept</button></td>
+    <td><button class="btn" (click)="send(challenger,'rejected')">Reject</button></td>
+     </tr>
+	 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>
+<app-challenger [challenger]="challenger" *ngIf="challenger" (close)="onHandleChallenger()">
+</app-challenger>

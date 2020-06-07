@@ -1,0 +1,36 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 50;
+}
+
+.alert-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 34vw;
+  height: 75vh;
+  padding: 16px;
+  z-index: 100;
+  transform: translate(-50%,-50%);
+  background: white;
+  border: 6px solid #e6ffe6;
+  border-radius: 2em;
+  box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
+}
+
+.alert-box-actions {
+  text-align: center;
+}
+.btn {
+  border-radius: 30px;
+}
+.divChart {
+	display: block;
+	width: 90%;
+	height: 90%;
+}

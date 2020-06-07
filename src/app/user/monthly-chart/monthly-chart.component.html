@@ -1,0 +1,257 @@
+<div class="userdiv">
+<!-- Challenger -->
+<div *ngIf="user.role==='Challenger'" class="innerdiv">
+    <form #chartForm="ngForm" (ngSubmit)="onSubmit(chartForm)">
+	<fieldset [disabled]="formDisabled">
+	<div class="container">
+	<div class="row">
+	<div class="col-xs-12 col-sm-6  col-md-6  col-lg-6">  
+	<br>
+	<div class="form-group">
+	<label>Month</label>
+	    <div class="form-control">{{ selectedMonth }}</div>
+	</div>
+	
+	<div class="form-group">
+        <label for="weight">Weight</label>
+        <input
+          type="text"
+          id="weight"
+          class="form-control"
+          ngModel
+          name="weight"
+          required
+          placeholder="Weight in kg"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #weight="ngModel"
+        />
+        <div class="error" *ngIf="weight.errors && (weight.invalid || weight.touched)">
+          <small *ngIf="weight.errors.required && weight.touched">Weight is required</small>
+          <small *ngIf="weight.errors.pattern">Please enter valid weight</small>
+        </div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="height">Height</label>
+        <input
+          type="text"
+          id="height"
+          class="form-control"
+          ngModel
+          name="height"
+          required
+          placeholder="Height in cm"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #height="ngModel"
+        />
+        <div class="error" *ngIf="height.errors && (height.invalid || height.touched)">
+          <small *ngIf="height.errors.required && height.touched">Height is required</small>
+          <small *ngIf="height.errors.pattern">Please enter valid height</small>
+        </div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="chest">Chest</label>
+        <input
+          type="text"
+          id="chest"
+          class="form-control"
+          ngModel
+          name="chest"
+          required
+          placeholder="Chest in cm"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #chest="ngModel"
+        />
+        <div class="error" *ngIf="chest.errors && (chest.invalid || chest.touched)">
+          <small *ngIf="chest.errors.required && chest.touched">Chest is required</small>
+          <small *ngIf="chest.errors.pattern">Please enter valid chest</small>
+        </div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="waist">Waist</label>
+        <input
+          type="text"
+          id="waist"
+          class="form-control"
+          ngModel
+          name="waist"
+          required
+          placeholder="waist in cm"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #waist="ngModel"
+        />
+        <div class="error" *ngIf="waist.errors && (waist.invalid || waist.touched)">
+          <small *ngIf="waist.errors.required && waist.touched">waist is required</small>
+          <small *ngIf="waist.errors.pattern">Please enter valid waist</small>
+        </div>
+      </div>
+	
+	</div>
+	<div class="col-xs-12 col-sm-6  col-md-6  col-lg-6"> 
+    <br>	
+	
+	<div class="form-group">
+        <label for="shoulders">Shoulders</label>
+        <input
+          type="text"
+          id="shoulders"
+          class="form-control"
+          ngModel
+          name="shoulders"
+          required
+          placeholder="Shoulders"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #shoulders="ngModel"
+        />
+        <div class="error" *ngIf="shoulders.errors && (shoulders.invalid || shoulders.touched)">
+          <small *ngIf="shoulders.errors.required && shoulders.touched">Shoulders is required</small>
+          <small *ngIf="shoulders.errors.pattern">Please enter valid shoulders</small>
+        </div>
+      </div>
+	
+	<div class="form-group">
+        <label for="biceps">Biceps</label>
+        <input
+          type="text"
+          id="biceps"
+          class="form-control"
+          ngModel
+          name="biceps"
+          required
+          placeholder="Biceps in cm"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #biceps="ngModel"
+        />
+        <div class="error" *ngIf="biceps.errors && (biceps.invalid || biceps.touched)">
+          <small *ngIf="biceps.errors.required && biceps.touched">Biceps is required</small>
+          <small *ngIf="biceps.errors.pattern">Please enter valid biceps</small>
+        </div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="forearm">Forearm</label>
+        <input
+          type="text"
+          id="forearm"
+          class="form-control"
+          ngModel
+          name="forearm"
+          required
+          placeholder="Forearm in cm"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #forearm="ngModel"
+        />
+        <div class="error" *ngIf="forearm.errors && (forearm.invalid || forearm.touched)">
+          <small *ngIf="forearm.errors.required && forearm.touched">Forearm is required</small>
+          <small *ngIf="forearm.errors.pattern">Please enter valid forearm</small>
+        </div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="leg">Leg</label>
+        <input
+          type="text"
+          id="leg"
+          class="form-control"
+          ngModel
+          name="leg"
+          required
+          placeholder="Leg in cm"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #leg="ngModel"
+        />
+        <div class="error" *ngIf="leg.errors && (leg.invalid || leg.touched)">
+          <small *ngIf="leg.errors.required && leg.touched">Leg is required</small>
+          <small *ngIf="leg.errors.pattern">Please enter valid leg</small>
+        </div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="thighs">Thighs</label>
+        <input
+          type="text"
+          id="thighs"
+          class="form-control"
+          ngModel
+          name="thighs"
+          required
+          placeholder="Thighs in cm"
+		  pattern="^[0-9]*$"
+		  maxlength="3"
+		  #thighs="ngModel"
+        />
+        <div class="error" *ngIf="thighs.errors && (thighs.invalid || thighs.touched)">
+          <small *ngIf="thighs.errors.required && thighs.touched">Thighs is required</small>
+          <small *ngIf="thighs.errors.pattern">Please enter valid thighs</small>
+        </div>
+      </div>
+	
+	</div>
+	</div>
+	<div class="buttons">
+	<button class="btn b" [disabled]="!chartForm.valid" type="submit">
+		  Submit
+        </button>&nbsp;
+		<button class="btn b" (click)="chartForm.reset()" type="button">
+          Reset
+        </button>
+	</div>
+	</div>
+	</fieldset>
+	</form>
+	</div>
+
+<!-- Administrator and Motivator -->
+<div *ngIf="user.role==='Administrator' || user.role==='Motivator'" class="row">
+  <div class="container">
+    <table class="table table-hover">
+	<thead>
+	<tr>
+	<th>Username</th>
+    <th>Month</th>
+    <th>Weight</th>
+    <th>Height</th>
+    <th>Chest</th>
+    <th>Waist</th>
+	<th>Shoulders</th>
+	<th>Biceps</th>
+	<th>Forearm</th>
+	<th>Leg</th>
+	<th>Thighs</th>
+	</tr></thead>
+	<tbody>
+    <tr *ngFor = "let chart of filteredCharts">
+    <td>{{ chart.email }}</td>
+    <td>{{ chart.month }}</td>
+    <td><button class="btn" (click)="getChart(chart,'Weight')">{{ chart.weight }}</button></td>
+    <td><button class="btn" (click)="getChart(chart,'Height')">{{ chart.height }}</button></td>
+    <td><button class="btn" (click)="getChart(chart,'Chest')">{{ chart.chest }}</button></td>
+    <td><button class="btn" (click)="getChart(chart,'Waist')">{{ chart.waist }}</button></td>
+	<td><button class="btn" (click)="getChart(chart,'Shoulders')">{{ chart.shoulders }}</button></td>
+    <td><button class="btn" (click)="getChart(chart,'Biceps')">{{ chart.biceps }}</button></td>
+	<td><button class="btn" (click)="getChart(chart,'Forearm')">{{ chart.forearm }}</button></td>
+	<td><button class="btn" (click)="getChart(chart,'Leg')">{{ chart.leg }}</button></td>
+	<td><button class="btn" (click)="getChart(chart,'Thighs')">{{ chart.thighs }}</button></td>
+     </tr>
+	 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>
+<app-chart [attribute]="attribute" *ngIf="attribute" [label]="label" [data]="data" (close)="onHandleChart()">
+</app-chart>

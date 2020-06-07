@@ -1,0 +1,154 @@
+<div class="userdiv">
+<!-- Challenger -->
+<div *ngIf="user.role==='Challenger'" class="innerdiv">
+    <form #logForm="ngForm" (ngSubmit)="onSubmit(logForm)">
+	<fieldset [disabled]="formDisabled">
+	<div class="container">
+    <div class="row">
+	<div class="col-xs-12 col-sm-6  col-md-6  col-lg-6">  
+	<br>
+	
+	<div class="form-group">
+        <label for="breakfast">Breakfast</label>
+        <input
+          type="text"
+          id="breakfast"
+          class="form-control"
+          ngModel
+          name="breakfast"
+          required
+          placeholder="Enter the breakfast"
+		  #breakfast="ngModel"
+        />
+        <div class="error" *ngIf="breakfast.errors && breakfast.touched">Breakfast is required</div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="lunch">Lunch</label>
+        <input
+          type="text"
+          id="lunch"
+          class="form-control"
+          ngModel
+          name="lunch"
+          required
+          placeholder="Enter the lunch"
+		  #lunch="ngModel"
+        />
+        <div class="error" *ngIf="lunch.errors && lunch.touched">Lunch is required</div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="dinner">Dinner</label>
+        <input
+          type="text"
+          id="dinner"
+          class="form-control"
+          ngModel
+          name="dinner"
+          required
+          placeholder="Enter the dinner"
+		  #dinner="ngModel"
+        />
+        <div class="error" *ngIf="dinner.errors && dinner.touched">Dinner is required</div>
+      </div>
+	
+	</div>
+	<div class="col-xs-12 col-sm-6  col-md-6  col-lg-6"> 
+    <br>	
+	
+	<div class="form-group">
+        <label for="fruits">Fruits</label>
+        <input
+          type="text"
+          id="fruits"
+          class="form-control"
+          ngModel
+          name="fruits"
+          required
+          placeholder="Enter the fruits"
+		  #fruits="ngModel"
+        />
+        <div class="error" *ngIf="fruits.errors && fruits.touched">Fruits is required</div>
+    </div>
+	
+	<div class="form-group">
+        <label for="vegetables">Vegetables</label>
+        <input
+          type="text"
+          id="vegetables"
+          class="form-control"
+          ngModel
+          name="vegetables"
+          required
+          placeholder="Enter the vegetables"
+		  #vegetables="ngModel"
+        />
+        <div class="error" *ngIf="vegetables.errors && vegetables.touched">Vegetables is required</div>
+      </div>
+	  
+	  <div class="form-group">
+        <label for="workouts">Workouts</label>
+        <input
+          type="text"
+          id="workouts"
+          class="form-control"
+          ngModel
+          name="workouts"
+          required
+          placeholder="Enter the workouts"
+		  #workouts="ngModel"
+        />
+        <div class="error" *ngIf="workouts.errors && workouts.touched">Workouts is required</div>
+      </div>
+	
+	</div>
+	</div>
+	<div class="buttons">
+	<button class="btn" [disabled]="!logForm.valid" type="submit">
+		  Submit
+        </button>&nbsp;
+		<button class="btn" (click)="logForm.reset()" type="button">
+          Reset
+        </button>
+	</div>
+	</div>
+	</fieldset>
+	</form>
+</div>
+<!-- Administrator and Motivator -->
+<div *ngIf="user.role==='Administrator' || user.role==='Motivator'" class="row">
+  <div class="container">
+    <table class="table table-hover">
+	<thead>
+	<tr>
+	<th>Username</th>
+    <th>Date</th>
+    <th>Breakfast</th>
+    <th>Lunch</th>
+    <th>Dinner</th>
+    <th>Fruits</th>
+	<th>Vegetables</th>
+	<th>workouts</th>
+	</tr></thead>
+	<tbody>
+    <tr *ngFor = "let log of filteredLogs">
+    <td>{{ log.email }}</td>
+    <td>{{ log.date }}</td>
+    <td>{{ log.breakfast }}</td>
+    <td>{{ log.lunch }}</td>
+    <td>{{ log.dinner }}</td>
+    <td>{{ log.fruits }}</td>
+	<td>{{ log.vegetables }}</td>
+    <td>{{ log.workouts }}</td>
+     </tr>
+	 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>

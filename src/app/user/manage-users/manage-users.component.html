@@ -1,0 +1,110 @@
+<div class="userdiv">
+<div class="innerdiv">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="form-group"> 
+	<label for="search">Search User By</label>
+          <select class="form-control" [(ngModel)]="selectedSearch" id="search">
+		    <option *ngFor="let s of search" [value]="s">{{s}}</option>
+          </select>
+	</div>
+	<div *ngIf="selectedSearch==='Username'" class="form-group">
+	    <input
+          type="email"
+		  class="form-control"
+          placeholder="Enter the username"
+		  [(ngModel)]="username"
+        />
+	</div>
+	<div *ngIf="selectedSearch==='Name'" class="form-group">
+	    <input
+          type="text"
+		  class="form-control"
+          placeholder="Enter the name"
+		  [(ngModel)]="name"
+        />
+	</div>
+	<div *ngIf="selectedSearch==='Batch' || selectedSearch==='Group'" class="form-group">
+	    <label for="batch">Select Batch</label>
+          <select class="form-control" [(ngModel)]="selectedBatch" id="batch">
+		    <option *ngFor="let batch of batches" [value]="batch">{{batch}}</option>
+          </select>
+	</div>
+	<div *ngIf="selectedSearch==='Group'" class="form-group">
+	    <label for="group">Select Group</label>
+          <select *ngIf="selectedBatch==='BELOW_BMI_25'" class="form-control" [(ngModel)]="selectedGroup" id="group">
+			<option *ngFor="let group of groups1" [value]="group.name">{{group.name}}</option>
+          </select>
+		  <select *ngIf="selectedBatch==='ABOVE_BMI_25'" class="form-control" [(ngModel)]="selectedGroup" id="group">
+			<option *ngFor="let group of groups2" [value]="group.name">{{group.name}}</option>
+          </select>
+	</div>
+	<button class="btn" (click)="searchUser()" type="submit">
+		Search
+    </button>
+  </div>
+  
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <label>Add User To</label>
+    <div class="form-group"> 
+	<label for="add">Batch</label>
+          <select class="form-control" [(ngModel)]="addBatch" id="add">
+		    <option *ngFor="let batch of batches" [value]="batch">{{batch}}</option>
+          </select>
+	</div>
+	<div class="form-group"> 
+	<label for="addgroup">Group</label>
+          <select *ngIf="addBatch==='BELOW_BMI_25'" class="form-control" [(ngModel)]="addGroup" id="addgroup">
+		    <option *ngFor="let group of groups1" [value]="group.name">{{group.name}}</option>
+          </select>
+		  <select *ngIf="addBatch==='ABOVE_BMI_25'" class="form-control" [(ngModel)]="addGroup" id="addgroup">
+		    <option *ngFor="let group of groups2" [value]="group.name">{{group.name}}</option>
+          </select>
+	</div>
+	<button class="btn" (click)="addUser()" type="submit">
+		Add
+    </button>
+  </div>
+  
+</div>
+<div *ngIf="table" class="row">
+  <div class="container">
+    <table class="table table-hover">
+	<thead>
+	<tr>
+	<th>Username</th>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Batch Name</th>
+    <th>Group Name</th>
+    <th>Mobile</th>
+	<th>Modify</th>
+	<th>Delete</th>
+	</tr></thead>
+	<tbody>
+    <tr *ngFor = "let user of filteredUsers">
+    <td>{{ user.email }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.role }}</td>
+    <td>{{ user.batchName }}</td>
+    <td>{{ user.groupName }}</td>
+    <td>{{ user.mobile }}</td>
+	<td><button class="btn" (click)="modify(user)">Modify</button></td>
+    <td><button class="btn" (click)="deleteUser(user)">delete</button></td>
+     </tr>
+	 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>
+
+<app-add-user [userToBeAdded]="userToBeAdded" *ngIf="userToBeAdded" (close)="onHandleAlert()">
+</app-add-user>
+
+<app-modify-user [userToBeModified]="userToBeModified" *ngIf="userToBeModified" (close)="onHandleAlert()">
+</app-modify-user>
+

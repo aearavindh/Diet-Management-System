@@ -1,0 +1,59 @@
+<div class="userdiv">
+<div *ngIf="user.role==='Administrator'" class="innerdiv">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="form-group"> 
+	<label for="post">Post Plan To</label>
+          <select class="form-control" [(ngModel)]="postBatch" id="post">
+		    <option value="BELOW_BMI_25">BELOW_BMI_25</option>
+			<option value="ABOVE_BMI_25">ABOVE_BMI_25</option>
+          </select>
+	</div>
+	<div class="form-group">
+	    <label for="message">Message</label>
+          <textarea id="message" class="form-control" [(ngModel)]="message" rows="2" cols="50">
+          </textarea>
+	</div>
+	<div class="form-group">
+	<label for="file">Select File</label>
+	    <input
+          type="file"
+		  class="form-control"
+		  (change)="handleFileInput($event)"
+		  accept=".pdf"
+		  id="file"
+        />
+	</div>
+	<button class="btn" [disabled]="file.size>209716" (click)="post()" type="button">
+		Post
+    </button>
+  </div>
+  
+</div>
+<div *ngIf="table" class="row">
+  <div class="container">
+    <table class="table table-hover">
+	<thead>
+	<tr>
+	<th>Date</th>
+    <th>From</th>
+    <th>Message</th>
+	<th>Diet/Workout Plan</th>
+	</tr></thead>
+	<tbody>
+    <tr *ngFor = "let post of posts; let i = index">
+    <td> {{ post.date }} </td>
+    <td> {{ post.fromUser }} </td>
+    <td> {{ post.message }} </td>
+	<td> <a [href]="files[i]" download="Diet_workout_plan.pdf">Download</a> </td>
+     </tr>
+	 </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>
+

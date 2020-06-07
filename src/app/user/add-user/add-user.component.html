@@ -1,0 +1,43 @@
+<div class="backdrop"></div>
+<div class="alert-box" [ngStyle]="{border: getBorder()}">
+  <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="form-group">
+	<label for="name">Name</label>
+	    <input
+          type="text"
+		  class="form-control"
+		  id="name"
+          placeholder="Enter the name"
+		  [(ngModel)]="userToBeAdded.name"
+        />
+	</div>
+	<div class="form-group">
+	<label for="email">E-Mail</label>
+	    <input
+          type="email"
+		  class="form-control"
+		  id="email"
+          placeholder="Enter the email"
+		  [(ngModel)]="userToBeAdded.email"
+        />
+	</div>
+	<div class="form-group"> 
+	<label for="role">Role</label>
+          <select class="form-control" [(ngModel)]="userToBeAdded.role" id="role">
+		    <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+          </select>
+	</div>
+  </div>
+  </div>
+  <div class="alert-box-actions">
+    <button class="btn" (click)="add()">Add</button>
+    <button class="btn" (click)="onClose()">Close</button>
+  </div>
+</div>
+
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>

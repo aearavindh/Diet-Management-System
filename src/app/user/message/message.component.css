@@ -1,0 +1,17 @@
+th, td {
+	text-align: center;
+	font-weight: bold;
+}
+th {
+	background-color: #006622;
+	color: #ffffff;
+}
+table {
+	background-color: #ffffff;
+}
+.innerdiv {
+	position: relative;
+	height: 65%;
+	width: 60%;
+	top: 32%;
+}

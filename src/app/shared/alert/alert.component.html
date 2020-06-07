@@ -1,0 +1,7 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box" [ngStyle]="{border: getBorderColor()}">
+  <p>{{ message }}</p>
+  <div class="alert-box-actions">
+    <button class="btn" [ngStyle]="{backgroundColor: getColor()}" (click)="onClose()">Close</button>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box" [ngStyle]="{border: getBorder()}">
+  <div class="divChart">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+  <div class="alert-box-actions">
+    <button class="btn" (click)="onClose()">Close</button>
+  </div>
+</div>

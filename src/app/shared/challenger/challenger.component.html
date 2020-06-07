@@ -1,0 +1,32 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box" [ngStyle]="{border: getBorder()}">
+  <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="form-group">Name: {{challenger.name}}</div>
+    <div class="form-group">Age: {{challenger.age}}</div>
+	<div class="form-group">Genger: {{challenger.gender}}</div>
+	<div class="form-group">Mobile: {{challenger.mobile}}</div>
+	<div class="form-group">Email: {{challenger.email}}</div>
+	<div class="form-group">Address: {{challenger.address}}</div>
+	<div class="form-group">City: {{challenger.city}}</div>
+	<div class="form-group">State: {{challenger.state}}</div>
+	<div class="form-group">Country: {{challenger.country}}</div>
+	<div class="form-group">Pincode: {{challenger.pinCode}}</div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+	<div class="form-group">Program: {{challenger.program}}</div>
+	<div class="form-group">Height: {{challenger.height}}</div>
+	<div class="form-group">Weight: {{challenger.weight}}</div>
+	<div class="form-group">BMI: {{challenger.bmi}}</div>
+	<div class="form-group">Reason: {{challenger.reason}}</div>
+	<div class="form-group">Medical Conditions: {{challenger.medicalConditions}}</div>
+	<div class="form-group">Dietary Restrictions: {{challenger.dietaryRestrictions}}</div>
+	<div class="form-group">Dietary Custom: {{challenger.dietaryCustom}}</div>
+	<div class="form-group">Referral Code: {{challenger.referralCode}}</div>
+	<div class="form-group">Pregnancy Status: {{challenger.pregnantStatus}}</div>
+  </div>
+  </div>
+  <div class="alert-box-actions">
+    <button class="btn" [ngStyle]="{backgroundColor: getColor()}" (click)="onClose()">Close</button>
+  </div>
+</div>

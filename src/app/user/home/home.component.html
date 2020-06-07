@@ -1,0 +1,254 @@
+<div class="userdiv">
+<div class="innerdiv">
+<div class="container"></div>
+<div *ngIf="user.role==='Challenger'" class="form-group">
+    <div class="form-group">
+	<label>Welcome Challenger,</label>
+	This is a quarterly program. If you wish to participate in the same program next quarter, please register for this again. Cheers.
+	</div>
+	</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+    <div class="form-control">
+	<label>Program: {{ title }}</label>
+	</div>
+	</div>
+	<div class="form-group">
+    <div class="form-control">
+	<label>Start Date: {{ startDate }}</label>
+	</div>
+	</div>
+	<div class="form-group">
+    <div class="form-control">
+	<label>End Date: {{ endDate }}</label>
+	</div>
+	</div>
+	
+	<div class="form-group">
+	<form #referForm="ngForm" (ngSubmit)="refer(referForm)">
+	    <input
+          type="email"
+          ngModel
+          name="email"
+          required
+          placeholder="Enter the email address"
+		  email
+		  #email="ngModel"
+        />
+		<div class="error" *ngIf="email.errors && (email.invalid || email.touched)">
+          <small *ngIf="email.errors.required && email.touched">Email is required</small>
+          <small *ngIf="email.errors.email">Please enter valid email</small>
+        </div>
+		<button class="btn" [disabled]="!referForm.valid" type="submit">
+		  Refer
+        </button>
+	</form>
+	</div>	
+	
+	<div *ngIf="this.user.role==='Challenger'" class="form-group">
+	<form #donateForm="ngForm" (ngSubmit)="donate(donateForm)">
+	    <input
+          type="text"
+          ngModel
+          name="amount"
+          required
+          placeholder="Enter the amount"
+		  pattern="^[0-9]*$"
+		  maxlength="10"
+		  #amount="ngModel"
+        />
+		<div class="error" *ngIf="amount.errors && (amount.invalid || amount.touched)">
+          <small *ngIf="amount.errors.required && amount.touched">Amount is required</small>
+          <small *ngIf="amount.errors.pattern">Please enter valid amount</small>
+        </div>
+		<button class="btn" [disabled]="!donateForm.valid" type="submit">
+		  Donate
+        </button>
+	</form>
+	</div>	
+	
+	<!-- Administrator -->
+	<div *ngIf="this.user.role==='Administrator'" class="form-group">
+	<button class="btn form-control co" (click)="endProgram()">End Program</button>
+	</div>
+	</div>
+	<!-- Administrator -->
+	<div *ngIf="this.user.role==='Administrator'" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+    <div class="form-control">
+	<label>Batch: {{ batches[0].name }}</label>
+	</div>
+	</div>
+	<div class="form-group">
+    <button class="btn form-control report" (click)="getReport('BELOW_BMI_25')">Report</button>
+	</div>
+	<div *ngIf="groups1.length !== 0">
+	<div *ngFor="let group of groups1" class="form-group">
+	<ul class="list-group">
+    <li class="list-group-item">Group: {{group.name}}</li>
+    </ul>
+	</div>
+	</div>
+	<div *ngIf="groups1.length === 0" >
+	<div class="form-group"> 
+	<label for="criteria">Criteria</label>
+          <select class="form-control" [(ngModel)]="selectedCriterion" id="criteria" required >
+		    <option *ngFor="let criterion of criteria" [value]="criterion">{{criterion}}</option>
+          </select>
+	</div>
+	<div class="form-group">
+	    <button class="btn" (click)="createGroups(batches[0])">Create Groups</button>
+	</div>
+	</div>
+    <div *ngIf="groups1.length !== 0" class="form-group">
+	<form #createForm1="ngForm" (ngSubmit)="onSubmit(createForm1, batches[0])">
+	    <input
+          type="text"
+          id="name"
+          ngModel
+          name="name"
+          required
+          placeholder="Enter the group name"
+		  pattern="^[A-Z ]*$"
+		  #name="ngModel"
+        />
+		<div class="error" *ngIf="name.errors && (name.invalid || name.touched)">
+          <small *ngIf="name.errors.required && name.touched">Group name is required</small>
+          <small *ngIf="name.errors.pattern">Group name can only contain uppercase alphabets</small>
+        </div>
+		<button class="btn" [disabled]="!createForm1.valid" type="submit">
+		  Create
+        </button>
+	</form>
+	</div>	
+	</div>
+	<!-- Administrator -->
+	<div *ngIf="this.user.role==='Administrator'" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+    <div class="form-control">
+	<label>Batch: {{ batches[1].name }}</label>
+	</div>
+	</div>
+	<div class="form-group">
+    <button class="btn form-control report" (click)="getReport('ABOVE_BMI_25')">Report</button>
+	</div>
+	<div *ngIf="groups2.length !== 0">
+	<div *ngFor="let group of groups2" class="form-group">
+	<ul class="list-group">
+    <li class="list-group-item">Group: {{group.name}}</li>
+    </ul>
+	</div>
+	</div>
+	<div *ngIf="groups2.length === 0" >
+	<div class="form-group"> 
+	<label for="criteria">Criteria</label>
+          <select class="form-control" [(ngModel)]="selectedCriterion" id="criteria" required >
+		    <option *ngFor="let criterion of criteria" [value]="criterion">{{criterion}}</option>
+          </select>
+	</div>
+	<div class="form-group">
+	    <button class="btn" (click)="createGroups(batches[1])">Create Groups</button>
+	</div>
+	</div>
+	<div *ngIf="groups2.length !== 0" class="form-group">
+	<form #createForm2="ngForm" (ngSubmit)="onSubmit(createForm2, batches[1])">
+	    <input
+          type="text"
+          id="name"
+          ngModel
+          name="name"
+          required
+          placeholder="Enter the group name"
+		  pattern="^[A-Z ]*$"
+		  #name="ngModel"
+        />
+		<div class="error" *ngIf="name.errors && (name.invalid || name.touched)">
+          <small *ngIf="name.errors.required && name.touched">Group name is required</small>
+          <small *ngIf="name.errors.pattern">Group name can only contain uppercase alphabets</small>
+        </div>
+		<button class="btn" [disabled]="!createForm2.valid" type="submit">
+		  Create
+        </button>
+	</form>
+	</div>
+	</div>
+	
+	
+	
+	<!-- Motivator and Challenger -->
+	<div *ngIf="this.user.role==='Motivator' || this.user.role==='Challenger'" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+    <div class="form-control">
+	<label>Batch: {{ fullUser.batchName }}</label>
+	</div>
+	</div>
+	<div class="form-group">
+    <div class="form-control">
+	<label>Username: {{ fullUser.email }}</label>
+	</div>
+	</div>
+	<div class="form-group">
+    <div class="form-control">
+	<label>Name: {{ fullUser.name }}</label>
+	</div>
+	</div>
+	<div class="form-group">
+    <div class="form-control">
+	<label>Role: {{ fullUser.role }}</label>
+	</div>
+	</div>
+	</div>
+	<div *ngIf="this.user.role==='Motivator' || this.user.role==='Challenger'" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="form-group">
+    <div class="form-control">
+	<label>Group: {{ fullUser.groupName }}</label>
+	</div>
+	</div>
+	<div class="form-group">
+    <div class="form-control">
+	<label>Code: {{ fullUser.code }}</label>
+	</div>
+	</div>
+	<div *ngIf="mobileButton==='Update Mobile'" class="form-group">
+    <div class="form-control">
+	<label>Mobile: {{ fullUser.mobile }}</label>
+	</div>
+	</div>
+	<div *ngIf="mobileButton==='Update'" class="form-group"> 
+	<form #mobileForm="ngForm" (ngSubmit)="updateMobile(mobileForm)">
+    <input
+          type="text"
+          id="mobile"
+          class="form-control fc"
+          ngModel
+          name="mobile"
+          required
+          placeholder="Enter your phone number"
+		  pattern="^[0-9]{10}$"
+		  maxlength="10"
+		  #mobile="ngModel"
+        />
+		<div class="error" *ngIf="mobile.errors && (mobile.invalid || mobile.touched)">
+          <small *ngIf="mobile.errors.required && mobile.touched">Phone number is required</small>
+          <small *ngIf="mobile.errors.pattern">Please enter valid phone number</small>
+        </div>
+		<button class="btn" [disabled]="!mobileForm.valid" type="submit">
+          Update
+        </button>
+		</form>
+	</div>
+	<div *ngIf="mobileButton==='Update Mobile'" class="form-group">
+	<button class="btn btnupdate" (click)="toggleMobile()">Update Mobile</button>
+	</div>
+	
+	</div>
+	
+</div>
+</div>
+</div>
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>

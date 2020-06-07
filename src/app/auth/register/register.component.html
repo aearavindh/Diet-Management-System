@@ -1,0 +1,288 @@
+<div class="header">
+    <h2>{{ title }} - {{ program }} Program</h2>
+</div>
+<div class="mydiv" [ngStyle]="{height: getHeight(),top: getTop()}">
+ <form #regForm="ngForm" (ngSubmit)="onSubmit(regForm)">
+ <fieldset [disabled]="formDisabled">
+ <div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+	  <br>
+	  <div class="form-group">
+        <label for="name">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          ngModel
+          name="name"
+          required
+          placeholder="Enter your full name"
+		  pattern="^[a-zA-Z ]*$"
+		  #name="ngModel"
+        />
+		<div class="error" *ngIf="name.errors && (name.invalid || name.touched)">
+          <small *ngIf="name.errors.required && name.touched">Name is required</small>
+          <small *ngIf="name.errors.pattern">Name can only contain alphabets</small>
+        </div>
+      </div>
+	  <div class="form-group">
+        <label for="age">Age</label>
+        <input
+          type="text"
+          id="age"
+          class="form-control"
+          ngModel
+          name="age"
+          required
+          placeholder="Enter your age"
+		  pattern="^[0-9]{1,3}$"
+		  maxlength="3"
+		  #age="ngModel"
+        />
+		<div class="error" *ngIf="age.errors && (age.invalid || age.touched)">
+          <small *ngIf="age.errors.required && age.touched">Age is required</small>
+          <small *ngIf="age.errors.pattern">Please enter valid age</small>
+        </div>
+      </div>
+	  <div class="form-group">
+	    <label>Gender</label><br>
+        <input type="radio" ngModel [(ngModel)]="gender" id="male" name="gender" value="male" required>
+         <label for="male">Male</label>&nbsp;
+        <input type="radio" ngModel [(ngModel)]="gender" id="female" name="gender" value="female" required>
+         <label for="female">Female</label>
+      </div>
+	  	  <div class="form-group">
+        <label for="mobile">Mobile Phone Number</label>
+        <input
+          type="text"
+          id="mobile"
+          class="form-control"
+          ngModel
+          name="mobile"
+          required
+          placeholder="Enter your phone number"
+		  pattern="^[0-9]{10}$"
+		  maxlength="10"
+		  #mobile="ngModel"
+        />
+		<div class="error" *ngIf="mobile.errors && (mobile.invalid || mobile.touched)">
+          <small *ngIf="mobile.errors.required && mobile.touched">Phone number is required</small>
+          <small *ngIf="mobile.errors.pattern">Please enter valid phone number</small>
+        </div>
+      </div>
+	  <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          ngModel
+          name="email"
+          required
+          placeholder="Enter your email address"
+		      email
+		      #email="ngModel"
+        />
+		<div class="error" *ngIf="email.errors && (email.invalid || email.touched)">
+          <small *ngIf="email.errors.required && email.touched">Email is required</small>
+          <small *ngIf="email.errors.email">Please enter valid email</small>
+        </div>
+      </div>
+	  <div class="form-group">
+        <label for="address">Address</label>
+        <input
+          type="text"
+          id="address"
+          class="form-control"
+          ngModel
+          name="address"
+          required
+          placeholder="Enter your address"
+		  #address="ngModel"
+        />
+		<div class="error" *ngIf="address.errors && (address.invalid || address.touched)">
+          <small *ngIf="address.errors.required && address.touched">Address is required</small>
+        </div>
+      </div>
+	</div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+	  <div *ngIf="!(gender==='female')"><br></div>
+	  <div class="form-group">
+         <label for="city">City</label>
+          <select class="form-control" ngModel id="city" name="city" required #city="ngModel">
+		    <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+          </select> 
+		  <div class="error" *ngIf="city.errors && (city.invalid || city.touched)">
+          <small *ngIf="city.errors.required && city.touched">City is required</small>
+        </div>
+     </div>
+	 <div class="form-group">
+         <label for="state">State</label>
+          <select class="form-control" ngModel id="state" name="state" required #state="ngModel">
+		    <option *ngFor="let state of states" [value]="state">{{state}}</option>
+          </select> 
+		  <div class="error" *ngIf="state.errors && (state.invalid || state.touched)">
+          <small *ngIf="state.errors.required && state.touched">State is required</small>
+        </div>
+     </div>
+	 <div class="form-group">
+         <label for="country">Country</label>
+          <select class="form-control" ngModel id="country" name="country" required #country="ngModel">
+		    <option value="India">India</option>
+          </select> 
+		  <div class="error" *ngIf="country.errors && (country.invalid || country.touched)">
+          <small *ngIf="country.errors.required && country.touched">Country is required</small>
+        </div>
+     </div>
+	 <div class="form-group">
+        <label for="pincode">Pin Code</label>
+        <input
+          type="text"
+          id="pincode"
+          class="form-control"
+          ngModel
+          name="pincode"
+          required
+          placeholder="Enter the pin code"
+		  pattern="^[0-9]{6}$"
+		  maxlength="6"
+		  #pincode="ngModel"
+        />
+		<div class="error" *ngIf="pincode.errors && (pincode.invalid || pincode.touched)">
+          <small *ngIf="pincode.errors.required && pincode.touched">Pincode is required</small>
+          <small *ngIf="pincode.errors.pattern">Please enter valid pin code</small>
+        </div>
+      </div>
+	  <div class="form-group">
+        <label for="height">Height(cm)</label>
+        <input
+          type="text"
+          id="height"
+          class="form-control"
+          ngModel
+		  [(ngModel)]="heightVar"
+          name="height"
+          required
+          placeholder="Enter your height"
+		  pattern="^[0-9.]*$"
+		  #height="ngModel"
+        />
+		<div class="error" *ngIf="height.errors && (height.invalid || height.touched)">
+          <small *ngIf="height.errors.required && height.touched">Height is required</small>
+          <small *ngIf="height.errors.pattern">Please enter valid height</small>
+        </div>
+      </div>
+	  <div class="form-group">
+        <label for="weight">Weight(kg)</label>
+        <input
+          type="text"
+          id="weight"
+          class="form-control"
+          ngModel
+		  [(ngModel)]="weightVar"
+          name="weight"
+          required
+          placeholder="Enter your weight"
+		  pattern="^[0-9.]*$"
+		  #weight="ngModel"
+        />
+		<div class="error" *ngIf="weight.errors && (weight.invalid || weight.touched)">
+          <small *ngIf="weight.errors.required && weight.touched">Weight is required</small>
+          <small *ngIf="weight.errors.pattern">Please enter valid weight</small>
+        </div>
+      </div>
+	  <div *ngIf="gender==='female'" class="form-group">
+	    <label>Pregnant Status</label><br>
+        <input type="radio" id="yes-pregnant" ngModel name="preg" value="yes" required #preg="ngModel">
+         <label for="yes-pregnant">Yes</label>&nbsp;
+        <input type="radio" id="no-pregnant" ngModel name="preg" value="no" required #preg="ngModel">
+         <label for="no-pregnant">No</label>
+      </div>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+	   <br>
+	   <div class="form-group">
+        <label for="bmi">BMI</label>
+        <button class="form-control" (click)="bmi()" [innerHTML]="status()" [ngStyle]="{backgroundColor: this.bmiVar<25?'#ccffcc':'#ffd6cc'}"></button>
+      </div>
+	  <div class="form-group">
+        <label for="reason">Reason for Joining</label>
+        <input
+          type="text"
+          id="reason"
+          class="form-control"
+          ngModel
+          name="reason"
+          required
+          placeholder="Enter the reason"
+		  pattern="^[a-zA-Z0-9 ]*$"
+		  #reason="ngModel"
+        />
+		<div class="error" *ngIf="reason.errors && (reason.invalid || reason.touched)">
+          <small *ngIf="reason.errors.required && reason.touched">Reason is required</small>
+          <small *ngIf="reason.errors.pattern">Please enter valid reason</small>
+        </div>
+      </div>
+	  <div class="form-group">
+	    <label>Any Existing Medical Conditions</label><br>
+        <input type="radio" id="yes-condition" ngModel name="con" value="yes" required #con="ngModel">
+         <label for="yes-condition">Yes</label>&nbsp;
+        <input type="radio" id="no-condition" ngModel name="con" value="no" required #con="ngModel">
+         <label for="no-condition">No</label>
+      </div>
+	  <div class="form-group">
+	    <label>Any Existing Dietary Restrictions</label><br>
+        <input type="radio" id="yes-restriction" ngModel name="res" value="yes" required #res="ngModel">
+         <label for="yes-restriction">Yes</label>&nbsp;
+        <input type="radio" id="no-restriction" ngModel name="res" value="no" required #res="ngModel">
+         <label for="no-restriction">No</label>
+      </div>
+	  <div class="form-group">
+	    <label>Dietary Custom</label><br>
+        <input type="radio" id="veg-custom" ngModel name="custom" value="veg" required #custom="ngModel">
+         <label for="veg-custom">Veg</label>&nbsp;
+        <input type="radio" id="nonveg-custom" ngModel name="custom" value="non-veg" required #custom="ngModel">
+         <label for="nonveg-custom">Non-Veg</label>&nbsp;
+		<input type="radio" id="vegan-custom" ngModel name="custom" value="vegan" required #custom="ngModel">
+         <label for="vegan-custom">Vegan</label>
+      </div>
+	  <div class="form-group">
+        <label for="referral">Referral Code(Optional)</label>
+        <input
+          type="email"
+          id="referral"
+          class="form-control"
+          ngModel
+          name="referral"
+          placeholder="Enter the referal code"
+		  pattern="^[0-9A-Z]{6}$"
+		  maxlength="6"
+		  #referral="ngModel"
+        />
+		<div class="error" *ngIf="referral.errors && referral.invalid">
+          <small *ngIf="referral.errors.pattern">Please enter valid referral code</small>
+        </div>
+      </div>
+	</div>
+  </div>
+  <div class="buttons" [ngStyle]="{left: screenWidth<992? '20%':'42%'}">
+	    <button class="btn" [disabled]="!regForm.valid" type="submit">
+		  Submit
+        </button>&nbsp;
+		<button class="btn" (click)="regForm.reset()" type="button">
+          Reset
+        </button>&nbsp;
+		<button class="btn" routerLink="" type="button">
+          Back
+        </button>
+   </div>
+  </div>
+  </fieldset>
+ </form>
+</div>
+<div class="spinner" *ngIf="isLoading" style="text-align: center;">
+      <app-loading-spinner></app-loading-spinner>
+</div>
+<app-alert [message]="alert" [type]="type" *ngIf="alert" (close)="onHandleAlert()">
+</app-alert>
