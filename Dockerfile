@@ -1,2 +1,2 @@
 FROM trion/nginx-angular
-COPY dist/ /usr/share/nginx/html/
+COPY dist/Capstone/ /usr/share/nginx/html/
