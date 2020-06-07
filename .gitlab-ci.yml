@@ -1,0 +1,40 @@
+stages:
+  - build
+  - docker_build
+  - deploy
+
+Building:
+  stage: build
+  image: trion/ng-cli
+  before_script:
+      - npm ci
+  script:
+      - ng build --prod 
+  artifacts:
+    paths:
+     - dist/
+    expire_in: 1 day
+
+     
+Building Docker Image:
+  stage: docker_build
+  tags:
+     - runner-1
+  script: 
+     - docker login -u aearavindh -p $DOCKER_PASSWORD
+     - docker build -t aearavindh/diet-system:latest .
+     - docker push aearavindh/diet-system:latest
+     
+Deployment:
+  stage: deploy
+  tags:
+     - runner-1
+  script:
+     - sshpass -p $SSH_USER_PASSWORD ssh -v -o StrictHostKeyChecking=no $DEPLOYMENT_HOST sudo docker container rm -f diets
+     - sshpass -p $SSH_USER_PASSWORD ssh -v -o StrictHostKeyChecking=no $DEPLOYMENT_HOST sudo docker rmi aearavindh/diet-system;sudo docker pull aearavindh/diet-system:latest
+     - sshpass -p $SSH_USER_PASSWORD ssh -v -o StrictHostKeyChecking=no $DEPLOYMENT_HOST sudo docker container run -d -p 9000:80 --name diets aearavindh/diet-system:latest
+  environment:
+     name: production
+     url: $PRODUCTION_ENVIRONMENT
+  only:
+     - master
