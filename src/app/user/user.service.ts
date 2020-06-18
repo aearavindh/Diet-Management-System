@@ -19,7 +19,7 @@ import { MonthlyChart } from '../model/monthly-chart.model';
 export class UserService {
 	user: User;
 	headers: HttpHeaders;
-	private serviceUrl = 'http://192.168.225.110:8000/';
+	private serviceUrl = 'http://3.19.28.73:8000/';
 	//private serviceUrl = 'http://localhost:8000/';
 
   constructor(private http: HttpClient) {
