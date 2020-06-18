@@ -24,7 +24,7 @@ export class ResponseData{
 })
 export class AuthService {
 	
-	private serviceUrl = 'http://52.14.113.159:8000/';
+	private serviceUrl = 'http://192.168.225.110:8000/';
 	//private serviceUrl = 'http://localhost:8000/';
 
   constructor(private http: HttpClient) { }
