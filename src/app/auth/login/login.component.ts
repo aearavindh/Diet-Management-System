@@ -13,7 +13,7 @@ import { User } from '../../model/user.model';
 })
 export class LoginComponent implements OnInit {
 
-  title = 'AEA Diet Management System';
+  title = 'Diet Management System';
   roles = ['Challenger','Motivator','Administrator']
   isLoading = false;
   formDisabled = false;

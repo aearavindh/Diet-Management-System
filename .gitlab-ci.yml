@@ -32,7 +32,7 @@ Deployment:
   script:
      - sshpass -p $SSH_USER_PASSWORD ssh -v -o StrictHostKeyChecking=no $DEPLOYMENT_HOST sudo docker container rm -f diets
      - sshpass -p $SSH_USER_PASSWORD ssh -v -o StrictHostKeyChecking=no $DEPLOYMENT_HOST sudo docker rmi aearavindh/diet-system;sudo docker pull aearavindh/diet-system:latest
-     - sshpass -p $SSH_USER_PASSWORD ssh -v -o StrictHostKeyChecking=no $DEPLOYMENT_HOST sudo docker container run -d -p 9000:80 --name diets aearavindh/diet-system:latest
+     - sshpass -p $SSH_USER_PASSWORD ssh -v -o StrictHostKeyChecking=no $DEPLOYMENT_HOST sudo docker container run -d -p 7000:80 --name diets aearavindh/diet-system:latest
   environment:
      name: production
      url: $PRODUCTION_ENVIRONMENT
